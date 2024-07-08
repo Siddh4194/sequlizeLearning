@@ -17,7 +17,7 @@ db.sequelize.sync({force:true});
 // ******************************************************************
 app.use('/api',routes);
 app.use('/',(req,res)=>{
-    res.send("<h1>Running On Port</h1>")
+    res.send("<h1>Sequalizing DB API</h1>")
 })
 // ******************************************************************
 

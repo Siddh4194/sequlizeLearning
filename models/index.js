@@ -5,6 +5,7 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
+const Users = require('./users');
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config.json')[env];
 const db = {};
@@ -27,9 +28,11 @@ fs
     );
   })
   .forEach(file => {
-    const model = new (require(path.join(__dirname, file)))(sequelize, Sequelize.DataTypes);
+    const model =  (require(path.join(__dirname, file)))(sequelize, Sequelize.DataTypes);
     db[model.name] = model;
   });
+
+  console.log("db file is calling");
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
@@ -40,4 +43,4 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+module.exports = {db,Users};
